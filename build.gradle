@@ -12,6 +12,26 @@ buildscript {
     }
 }
 
+def getVersionName = { ->
+    def stdout = new ByteArrayOutputStream()
+
+    exec {
+        commandLine 'git', 'describe', '--tags'
+        standardOutput = stdout
+    }
+
+    return stdout.toString().trim()
+}
+
+def getVersionCodeString = { ->
+    def stdout = new ByteArrayOutputStream()
+    exec {
+        commandLine 'git', 'rev-list', '--all', '--count'
+        standardOutput = stdout
+    }
+    return stdout.toString().trim()
+}
+
 android {
     sourceSets {
         aosp {
@@ -23,7 +43,8 @@ android {
         aosp {
             applicationId appId
             testApplicationId "com.android.talkback.test"
-            versionName "5.0.7_aosp"
+            versionName getVersionName()
+            versionCode Integer.parseInt(getVersionCodeString())
         }
     }
 }
