@@ -3,9 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.android.talkback">
 
-    <!-- Required to monitor phone busy state. -->
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-
     <!-- Required for haptic feedback. -->
     <uses-permission android:name="android.permission.VIBRATE" />
 

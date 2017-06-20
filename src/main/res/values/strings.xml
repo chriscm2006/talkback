@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!--The human-readable name of this service. Do not translate. -->
-    <string name="talkback_title" translatable="false">InMyEyes</string>
+    <string name="talkback_title" translatable="false">In My Eyes</string>
     <!--
       Source: A brief description of TalkBack.
       Description: This is presented to the user on the accessibility settings view. [CHAR LIMIT="NONE"]
