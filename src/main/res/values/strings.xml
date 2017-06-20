@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!--The human-readable name of this service. Do not translate. -->
-    <string name="talkback_title" translatable="false">TalkBack</string>
+    <string name="talkback_title" translatable="false">InMyEyes</string>
     <!--
       Source: A brief description of TalkBack.
       Description: This is presented to the user on the accessibility settings view. [CHAR LIMIT="NONE"]
     -->
-    <string name="talkback_service_description">When TalkBack is on, your device provides spoken feedback to help blind and low-vision users. For example, it describes what you touch, select, and activate.\n\nIf you have turned TalkBack on accidentally, turn it off by tapping the switch until the green outline is around it, then double-tapping it. Do the same interaction for the resulting confirmation dialog.</string>
+    <string name="talkback_service_description">TalkBack is the standard android Screen Reader. In my shoes takes TalkBack and adds an overlay to the screen so that sighted indviduals are forced to use their app the way a blind user would. So you can use your app "in their eyes" before you post it to the App Store.</string>
 
     <string name="talkback_on">TalkBack on</string>
     <string name="talkback_suspended">TalkBack suspended</string>

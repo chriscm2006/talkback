@@ -87,6 +87,11 @@ public class TalkBackPreferencesActivity extends Activity {
 
         getFragmentManager().beginTransaction()
                 .replace(android.R.id.content, new TalkBackPreferenceFragment()).commit();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + getPackageName()));
+            startActivityForResult(intent, 0);
+        }
     }
 
     public static class TalkBackPreferenceFragment extends PreferenceFragment {

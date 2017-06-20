@@ -24,10 +24,14 @@ import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
@@ -95,6 +99,13 @@ public class AccessibilityTutorialActivity extends Activity implements TutorialN
         mainFragment.setOnLessonSelectedCallback(this);
         mainFragment.setTutorialController(mTutorialController);
         switchFragment(mainFragment, MAIN_FRAGMENT_NAME);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (!Settings.canDrawOverlays(this)) {
+                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + getPackageName()));
+                startActivityForResult(intent, 0);
+            }
+        }
     }
 
     public boolean isTablet() {

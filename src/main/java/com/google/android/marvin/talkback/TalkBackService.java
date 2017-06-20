@@ -19,6 +19,7 @@ package com.google.android.marvin.talkback;
 import android.annotation.SuppressLint;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -295,6 +296,8 @@ public class TalkBackService extends AccessibilityService
 
     private ProcessorScreen mProcessorScreen;
 
+    private ScreenOverlay mScreenOverlay;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -311,6 +314,11 @@ public class TalkBackService extends AccessibilityService
 
         mAccessibilityEventProcessor = new AccessibilityEventProcessor(this);
         initializeInfrastructure();
+
+        mScreenOverlay = new ScreenOverlay(this);
+        mScreenOverlay.overlayScreen();
+
+        Log.wtf("CHRIS", "Yep");
     }
 
     @Override
@@ -327,6 +335,8 @@ public class TalkBackService extends AccessibilityService
         shutdownInfrastructure();
         setServiceState(SERVICE_STATE_INACTIVE);
         mServiceStateListeners.clear();
+
+        mScreenOverlay.detach();
     }
 
     @Override

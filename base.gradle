@@ -113,7 +113,7 @@ dependencies {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.1'
+    gradleVersion = '2.14.1'
 }
 
 // Copy preferences.xml to xml-v21 replacing CheckBoxPreference with SwitchPreference.

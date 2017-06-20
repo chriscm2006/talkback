@@ -1,5 +1,7 @@
 apply from: 'base.gradle'
 
+def appId = "com.moba11y.inmyshoes"
+
 buildscript {
     repositories {
         mavenCentral()
@@ -19,7 +21,7 @@ android {
     }
     productFlavors {
         aosp {
-            applicationId "com.android.talkback"
+            applicationId appId
             testApplicationId "com.android.talkback.test"
             versionName "5.0.7_aosp"
         }
