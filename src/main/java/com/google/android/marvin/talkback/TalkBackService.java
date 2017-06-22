@@ -23,6 +23,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.v4.os.AsyncTaskCompat;
 import android.view.accessibility.AccessibilityNodeInfo;
 
 import android.accessibilityservice.AccessibilityService;
@@ -336,7 +337,7 @@ public class TalkBackService extends AccessibilityService
         setServiceState(SERVICE_STATE_INACTIVE);
         mServiceStateListeners.clear();
 
-        mScreenOverlay.detach();
+        mScreenOverlay.removeOverlay();
     }
 
     @Override
@@ -352,6 +353,8 @@ public class TalkBackService extends AccessibilityService
     @Override
     public void onAccessibilityEvent(AccessibilityEvent event) {
         mAccessibilityEventProcessor.onAccessibilityEvent(event);
+
+        mScreenOverlay.overlayScreen();
     }
 
     public boolean supportsTouchScreen() {
@@ -617,6 +620,11 @@ public class TalkBackService extends AccessibilityService
 
     @Override
     protected boolean onGesture(int gestureId) {
+
+        if (gestureId == GESTURE_SWIPE_DOWN_AND_UP) {
+            mScreenOverlay.removeOverlayTemporarily();
+        }
+
         if (!isServiceActive()) return false;
 
         if (LogUtils.LOG_LEVEL <= Log.VERBOSE) {
