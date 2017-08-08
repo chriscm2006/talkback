@@ -28,7 +28,9 @@ class ScreenOverlay {
 
     private View mOverlayView = null;
 
-    private static final int REMOVE_OVERLAY_TIME = 5;
+    private static final int OVERLAY_DELAY_IN_SECONDS = 5;
+
+    private static final int MILLISECONDS_IN_A_SECOND = 1000;
 
     ScreenOverlay(AccessibilityService instance) {
 
@@ -81,7 +83,7 @@ class ScreenOverlay {
         textView.setPadding(padding, padding, padding, padding);
         textView.setTextSize(20);
 
-        textView.setText("While this accessibility service is active this overlay will block all screen contents. Not even the Accessibility Focus rectangle will be visible. This forces you to rely on TalkBack spoken feedback the way a blind user would. \n\nIf you get stuck, quickly swiping DOWN and UP will disable the overlay for " +  REMOVE_OVERLAY_TIME  + " seconds. Try not to rely on this \"cheat\" too frequently. Use TalkBack feedback to re-orient yourself with your current view, the same way a blind user would! Good luck!");
+        textView.setText("While this accessibility service is active this overlay will block all screen contents. Not even the Accessibility Focus rectangle will be visible. This forces you to rely on TalkBack spoken feedback the way a blind user would. \n\nIf you get stuck, quickly swiping DOWN and UP will disable the overlay for " +  OVERLAY_DELAY_IN_SECONDS  + " seconds. Try not to rely on this \"cheat\" too frequently. Use TalkBack feedback to re-orient yourself with your current view, the same way a blind user would! Good luck!");
 
         mWindowManager.addView(textView, getLayoutParams(mService.getResources().getDisplayMetrics()));
 
@@ -91,10 +93,22 @@ class ScreenOverlay {
 
     private boolean mProhibitOverlay = false;
 
+    private final Handler mOverlayHandler = new Handler();
+
+    private final Runnable mOverlayRunnable = new Runnable() {
+        @Override
+        public void run() {
+            mProhibitOverlay = false;
+            overlayScreen();
+        }
+    };
+
     void removeOverlay() {
         if (canDrawOverlays()) mWindowManager.removeView(mOverlayView);
 
         mOverlayView = null;
+
+        mOverlayHandler.removeCallbacks(mOverlayRunnable);
     }
 
     void removeOverlayTemporarily() {
@@ -102,13 +116,6 @@ class ScreenOverlay {
 
         mProhibitOverlay = true;
 
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mProhibitOverlay = false;
-                overlayScreen();
-            }
-        }, REMOVE_OVERLAY_TIME * 1000);
+        mOverlayHandler.postDelayed(mOverlayRunnable, OVERLAY_DELAY_IN_SECONDS * MILLISECONDS_IN_A_SECOND);
     }
 }

@@ -6,7 +6,7 @@
       Source: A brief description of TalkBack.
       Description: This is presented to the user on the accessibility settings view. [CHAR LIMIT="NONE"]
     -->
-    <string name="talkback_service_description">TalkBack is the standard android Screen Reader. In my shoes takes TalkBack and adds an overlay to the screen so that sighted indviduals are forced to use their app the way a blind user would. So you can use your app "in their eyes" before you post it to the App Store.</string>
+    <string name="talkback_service_description">TalkBack is the standard android Screen Reader. In My Eyes takes TalkBack and adds an overlay to the screen so that sighted indviduals are forced to use their app the way a blind user would. So you can use your app "in their eyes" before you post it to the App Store.</string>
 
     <string name="talkback_on">TalkBack on</string>
     <string name="talkback_suspended">TalkBack suspended</string>
